@@ -56,9 +56,9 @@ font-family:Ledger,serif;
 </div>
 <div id="mapdiv"></div>  
 <script type="text/javascript">
-var lat=41.992,
-	lon=12.393,
-	zoom=5;
+var lat=-14.50,
+	lon=-49.14,
+	zoom=3;
 	var osm = new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: 'Map Data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'});
 	var cyclemap = new L.TileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {maxZoom: 18, attribution: 'Map Data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'});
 	var mapquest = new L.TileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {subdomains: '1234', maxZoom: 18, attribution: 'Map Data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'});	
@@ -102,7 +102,7 @@ var hash = new L.Hash(map);
 		map.addLayer(geojson);
 	}
 
-var httpurl="http://api.openstreetmap.org/api/0.6/notes/search.json?q=su.openstreetmap.it&closed=0&limit=100";
+var httpurl="http://api.openstreetmap.org/api/0.6/notes/search.json?q=osmbrazil.zapto.org&closed=0&limit=100";
 microAjax(httpurl,function (res) { 
 var feat=JSON.parse(res);
 loadLayer(feat);
