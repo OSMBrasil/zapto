@@ -1,12 +1,15 @@
 var findme_map = L.map('findme-map')
     .setView([-14.50, -49.14], 3),
-    osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    osmAttrib = 'Dados do mapa © Contribuidores OpenStreetMap',
+    osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    osmAttrib = 'Map data © OpenStreetMap contributors',
     osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 18, attribution: osmAttrib}).addTo(findme_map),
     category_data = [];
 var	payment_data = [];
 
-var findme_marker = L.marker([-14.50, -49.14], {draggable:true}).addTo(findme_map);
+// Check if user is on business page or home/address page
+var addr = location.pathname.match(/address/) ? true : false;
+
+var findme_marker = L.marker([0,0], {draggable:true}).addTo(findme_map);
 findme_marker.setOpacity(0);
 
  L.control.locate({
@@ -16,56 +19,62 @@ findme_marker.setOpacity(0);
 
 if (location.hash) location.hash = '';
 
-$.getJSON('./categories.json').success(function(data){
-    category_data = data;
+var successString,loadingText;
+
+i18n.init({ fallbackLng: 'pt-BR', postAsync: 'false' }, function() {
+    $("body").i18n();
+
+    successString=i18n.t('messages.success', { escapeInterpolation: false });
+    loadingText=i18n.t('messages.loadingText');
+
+    var detectedLang = i18n.lng();
+    var buildSelectControl = function(data) {
+        $("#category").select2({data: data});
+    };
+
+    $.getJSON('./locales/' + detectedLang + '/categories.json', buildSelectControl).fail(function () {
+        // 404? Fall back to pt-BR
+         $.getJSON('./locales/pt-BR/categories.json', buildSelectControl);
+    });
 });
 
-$.getJSON('./payment.json').success(function(data){
-    payment_data = data;
-});
+function zoom_to_point(chosen_place, map, marker) {
+    console.log(chosen_place);
+
+    marker.setOpacity(1);
+    marker.setLatLng([chosen_place.lat, chosen_place.lon]);
 
 
-$("#category").select2({
-    query: function (query) {
-        var data = {results: []}, i;
-        for (i = 0; i < category_data.length; i++) {
-            if (query.term.length === 0 || category_data[i].toLowerCase().indexOf(query.term.toLowerCase()) >= 0) {
-                data.results.push({id: category_data[i], text: category_data[i]});
+    map.setView(chosen_place, 18, {animate: true});
+}
+$("#use_my_location").click(function (e) {
+    $("#couldnt-find").hide();
+    $("#success").hide();
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var point = {
+                lat: position.coords.latitude,
+                lon: position.coords.longitude
             }
-        }
-        query.callback(data);
+
+            zoom_to_point(point, findme_map, findme_marker);
+
+            $('#success').html(successString);
+            $('#success').show();
+            window.scrollTo(0, $('#address').position().top - 30);
+            $('.step-2 a').attr('href', '#details');
+        }, function (error) {
+            $("#couldnt-find").show();
+        });
+    } else {
+      $("#couldnt-find").show();
     }
 });
-
-$("#payment").select2({
-    multiple:true,
-    query:function(query) {
-        var data={results:[]},i;
-        for (i = 0; i < payment_data.length; i++) {
-            if (query.term.length === 0 || payment_data[i].toLowerCase().indexOf(query.term.toLowerCase()) >= 0) {
-                data.results.push({id: payment_data[i], text: payment_data[i]});
-            }
-        }
-
-        query.callback(data);
-    }
-});
-
-$("#wheel").select2({
-    data: [
-        {id: 'yes', text: 'Completamente acessível'},
-        {id: 'limited', text: 'Parcialmente acessível'},
-        {id: 'no', text: 'Não acessível'},
-        {id: 'designated', text: 'Não acessível, apenas no projeto'},
-        {id: 'unknown', text: 'Nível de acessibilidade desconhecido'}
-    ],
-    width: '85%'
-});
-
-/* search action */
 $("#find").submit(function(e) {
     e.preventDefault();
     $("#couldnt-find").hide();
+    $("#invalid-location").hide();
+    $("#success").hide();
     var address_to_find = $("#address").val();
     if (address_to_find.length === 0) return;
     
@@ -74,74 +83,19 @@ $("#find").submit(function(e) {
         format: 'json',
         q: address_to_find
     };
-    var url_nominatim = "http://nominatim.openstreetmap.org/search?" + $.param(qwarg_nominatim);
-    
-    /* SOLR TEST SERVER */
-    var qwarg_solr = {
-        wt: 'json',
-        indent: 'true',
-        qt: 'italian',
-        q: address_to_find
-    };
-    var url_solr = "http://95.240.35.64:8080/solr-example/collection1/select?" + $.param(qwarg_solr);
-    
-    var instance='nominatim';
-    
-    $("#findme h4").text("Localizando...");
+    var url = "https://nominatim.openstreetmap.org/search?" + $.param(qwarg);
+    $("#findme h4").text(loadingText);
     $("#findme").addClass("loading");
-	
-	if (instance=='nominatim')
-	{
-		$.ajax({
-		  'url': url_nominatim,
-		  'success': nominatim_callback,
-		  'dataType': 'jsonp',
-		  'jsonp': 'json_callback'
-		});
-	}
-	else
-	{
-		$.ajax({
-		  'url': url_solr,
-		  'success': solr_callback,
-		  'dataType': 'jsonp',
-		  'jsonp': 'json.wrf'
-		});	
-	}
-});
+    $.getJSON(url, function(data) {
+        if (data.length > 0) {
+            zoom_to_point(data[0], findme_map, findme_marker);
 
-function nominatim_callback(data){
-	if (data.length > 0) {
-            var chosen_place = data[0];
-            //console.log(chosen_place);
-
-            var bounds = new L.LatLngBounds(
-                [+chosen_place.boundingbox[0], +chosen_place.boundingbox[2]],
-                [+chosen_place.boundingbox[1], +chosen_place.boundingbox[3]]);
-
-            findme_map.fitBounds(bounds);
-            findme_marker.setOpacity(1);
-            findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
-            $('#instructions').html('Encontramos! Clique e arraste o marcador para o local do seu negócio, então você estará pronto para <a href="#details">adicionar à nossa lista os detalhes de sua empresa</a>.');
+            $('#success').html(successString);
+            $('#success').show();
+            window.scrollTo(0, $('#address').position().top - 30);
             $('.step-2 a').attr('href', '#details');
-            $('#addressalt').val(chosen_place.display_name);
-    }	else {
-            $('#instructions').html('<strong>Não conseguimos encontrar o seu endereço.</strong> Tente descrever sua rua ou cidade com menos detalhe.');
-        }
-    $("#findme").removeClass("loading");
-}
-
-function solr_callback(data){
-	if (data.response.docs.length > 0) {
-	    var docs=data.response.docs;
-		var coords=docs[0].coordinate.split(',');
-            findme_marker.setOpacity(1);
-            findme_marker.setLatLng([coords[0], coords[1]]);
-			findme_map.setView([coords[0], coords[1]],16);
-            $('#instructions').html('Encontramos! Clique e arraste o marcador para o local do seu negócio, então você estará pronto para <a href="#details">adicionar à nossa lista os detalhes de sua empresa</a>.');
-            $('.step-2 a').attr('href', '#details');
-    }   else {
-            $('#instructions').html('<strong>Não conseguimos encontrar o seu endereço.</strong> Tente descrever sua rua ou cidade com menos detalhe.');
+        } else {
+            $("#couldnt-find").show();
         }
 	$("#findme").removeClass("loading");
 }
@@ -179,19 +133,23 @@ $(window).on('hashchange', function() {
 $("#collect-data-done").click(function() {
     location.hash = '#done';
 
-    var note_body = "Nota enviada por openstreetmap.com.br/zapto\n \n";
-        if ($("#name").val()) note_body += "Nome: " + $("#name").val() + "\n";
-        if ($("#phone").val()) note_body += "Telefone: " + $("#phone").val() + "\n";
-        if ($("#website").val()) note_body += "Website: " + $("#website").val() + "\n";
-        if ($("#social").val()) note_body += "Redes sociais: " + $("#social").val() + "\n";
-        if ($("#opening_hours").val()) note_body += "Horário de funcionamento: " + $("#opening_hours").val() + "\n";
-        if ($("#wheel").val()) note_body += "Acessibilidade para cadeirantes: " + $("#wheel").val() + "\n";
-        if ($("#category").val()) note_body += "Categoria: " + $("#category").val() + "\n";
-        if ($("#categoryalt").val()) note_body += "Descrição: " + $("#categoryalt").val() + "\n";
-        if ($("#addressalt").val()) note_body += "Endereço: " + $("#addressalt").val() + "\n";
-        if ($("#payment").val()) note_body += "Modos de pagamento aceitos: " + $("#payment").val() + "\n";
-    var latlon = findme_marker.getLatLng();
-    var qwarg = {
+    var note_body = !addr ? 
+        "onosm.org submitted note from a business:\n" +
+        "name: " + $("#name").val() + "\n" +
+        "phone: " + $("#phone").val() + "\n" +
+        "website: " + $("#website").val() + "\n" +
+        "twitter: " + $("#twitter").val() + "\n" +
+        "hours: " + $("#opening_hours").val() + "\n" +
+        "category: " + $("#category").val() + "\n" +
+        "address: " + $("#address").val() 
+        : 
+        "onosm.org submitted note for a home address:\n" + 
+        "number: " + $("#number").val() + "\n" +
+        "street: " + $("#street").val() + "\n" +
+        "city: " + $("#city").val() + "\n" +
+        "postal_code: " + $("#postal_code").val() + "\n",
+        latlon = findme_marker.getLatLng(),
+        note_data = {
             lat: latlon.lat,
             lon: latlon.lng,
             text: note_body
@@ -204,20 +162,35 @@ $("#collect-data-done").click(function() {
 		$("#linkcoords").append('<a href="'+link+'">'+link+'</a>');
 	});
 
+    $.post(
+        'https://api.openstreetmap.org/api/0.6/notes.json',
+        note_data,
+        function(result) {
+            var id = result.properties.id;
+            $("#linkcoords").append(
+                '<a href="https://osm.org/note/' + id + '">https://osm.org/note/' + id + '</a>'
+            );
+        }
+    );
 });
 
-function clearFields(){
-	$("#name").empty();
-	$("#phone").empty();
-	$("#website").empty();
-	$("#social").empty();
-	$("#opening_hours").empty();
-	$("#category").empty();
-	$("#categoryalt").empty();
-	$("#address").empty();
-	$("#payment").empty();
-	$("#wheel").empty();
-	$("#linkcoords").empty();
+function clearFields() {
+    $("#name").val('');
+    $("#phone").val('');
+    $("#website").val('');
+    $("#twitter").val('');
+    $("#opening_hours").val('');
+    $("#category").val('');
+    $("#address").val('');
+    $("#linkcoords").empty();
 }
 
-clearFields();
+function check_coordinates() {
+    var latlon = findme_marker.getLatLng();
+
+    if ((latlon.lat != 0) || (latlon.lng != 0)) {
+        location.hash = '#details';
+    } else {
+        $("#invalid-location").show();
+    }
+}
