@@ -2,7 +2,7 @@
   "app": {
     "title": "On OpenStreetMap",
     "desc": "OpenStreetMap ist eine offene, globale Karte, die von Menschen überall auf der Welt zur Navigation und zur Suche nach lokalen Geschäften genutzt wird. Es ist einfach und kostenlos das eigene Geschäft auf die Karte zu bringen!",
-    "footer": "Quellcode erhältlich auf <a href='https://github.com/osmlab/onosm.org'>GitHub</a>"
+    "footer": "Quellcode erhältlich auf <a href='https://github.com/OSMBrasil/zapto'>GitHub</a>"
   },
   "step1": {
     "title": "Ort / Adresse",
