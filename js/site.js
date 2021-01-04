@@ -5,25 +5,20 @@ var findme_map = L.map('findme-map')
     osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 18, attribution: osmAttrib}).addTo(findme_map),
     category_data = [];
 
-// Check if user is on business page or home/address page
-var addr = location.pathname.match(/address/) ? true : false;
-
 var findme_marker = L.marker([0,0], {draggable:true}).addTo(findme_map);
 findme_marker.setOpacity(0);
 
 if (location.hash) location.hash = '';
 
-var successString,loadingText;
-
 i18n.init({ fallbackLng: 'pt-BR', postAsync: 'false' }, function() {
     $("body").i18n();
 
-    successString=i18n.t('messages.success', { escapeInterpolation: false });
-    loadingText=i18n.t('messages.loadingText');
-
     var detectedLang = i18n.lng();
     var buildSelectControl = function(data) {
-        $("#category").select2({data: data});
+        $("#category").select2({
+            multiple: true,
+            data: data,
+        });
     };
 
     $.getJSON('./locales/' + detectedLang + '/categories.json', buildSelectControl).fail(function () {
@@ -53,7 +48,7 @@ $("#use_my_location").click(function (e) {
 
             zoom_to_point(point, findme_map, findme_marker);
 
-            $('#success').html(successString);
+            $('#success').html(i18n.t('messages.success', { escapeInterpolation: false }));
             $('#success').show();
             window.scrollTo(0, $('#address').position().top - 30);
             $('.step-2 a').attr('href', '#details');
@@ -76,13 +71,13 @@ $("#find").submit(function(e) {
         q: address_to_find
     };
     var url = "https://nominatim.openstreetmap.org/search?" + $.param(qwarg);
-    $("#findme h4").text(loadingText);
+    $("#findme h4").text(i18n.t('messages.loadingText'));
     $("#findme").addClass("loading");
     $.getJSON(url, function(data) {
         if (data.length > 0) {
             zoom_to_point(data[0], findme_map, findme_marker);
 
-            $('#success').html(successString);
+            $('#success').html(i18n.t('messages.success', { escapeInterpolation: false }));
             $('#success').show();
             window.scrollTo(0, $('#address').position().top - 30);
             $('.step-2 a').attr('href', '#details');
@@ -116,23 +111,33 @@ $(window).on('hashchange', function() {
 });
 
 $("#collect-data-done").click(function() {
+    // Basic form validation
+    if ($("#category").val().length == 0) {
+        $("#form-invalid").text(i18n.t('validation.missingCategory'));
+        return false;
+    } else if ($("#name").val().length < 3) {
+        $("#form-invalid").text(i18n.t('validation.missingName'));
+        return false;
+    } else if ($("#phone").val().length < 5 && $("#website").length < 10) {
+        $("#form-invalid").text(i18n.t('validation.missingPhoneOrWebsite'));
+        return false;
+    } else {
+        $("#form-invalid").text("");
+    }
+
     location.hash = '#done';
 
-    var note_body = !addr ? 
+    var note_body =
         "onosm.org submitted note from a business:\n" +
         "name: " + $("#name").val() + "\n" +
         "phone: " + $("#phone").val() + "\n" +
         "website: " + $("#website").val() + "\n" +
         "twitter: " + $("#twitter").val() + "\n" +
+        "facebook: " + $("#facebook").val() + "\n" +
+        "email: " + $("#email").val() + "\n" +
         "hours: " + $("#opening_hours").val() + "\n" +
-        "category: " + $("#category").val() + "\n" +
-        "address: " + $("#address").val() 
-        : 
-        "onosm.org submitted note for a home address:\n" + 
-        "number: " + $("#number").val() + "\n" +
-        "street: " + $("#street").val() + "\n" +
-        "city: " + $("#city").val() + "\n" +
-        "postal_code: " + $("#postal_code").val() + "\n",
+        "category: " + $("#category").val().join(", ") + "\n" +
+        "address: " + $("#address").val(),
         latlon = findme_marker.getLatLng(),
         note_data = {
             lat: latlon.lat,
