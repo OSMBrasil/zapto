@@ -26,15 +26,15 @@
     "phoneplaceholder": "+55 84 3219 0102",
     "opening": "Horário de funcionamento",
     "openingplaceholder": "Segunda a sexta-feira, das 10:00 às 19:00",
-    "website": "Website",
+    "website": "Site",
     "websiteplaceholder": "www.exemplo.com.br/",
-    "email": "Email",
+    "email": "E-mail",
     "emailplaceholder": "contact@example.com",
     "twitter": "Twitter",
     "twitterplaceholder": "@OpenStreetMap",
     "facebook": "Facebook",
     "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
-    "done": "Gravar"
+    "done": "Salvar"
   },
   "step3": {
     "title": "Conclusão",
