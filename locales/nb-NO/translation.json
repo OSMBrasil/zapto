@@ -29,8 +29,12 @@
     "openingplaceholder": "Mandag til Fredag 9-18...",
     "website": "Nettside",
     "websiteplaceholder": "http://www.eksempel.no/",
-    "social": "Sosiale Medier",
-    "socialplaceholder": "@OpenStreetMap eller https://www.facebook.com/OpenStreetMap",
+    "email": "Email",
+    "emailplaceholder": "contact@example.com",
+    "twitter": "Twitter",
+    "twitterplaceholder": "@OpenStreetMap",
+    "facebook": "Facebook",
+    "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
     "done": "Ferdig!"
   },
   "step3": {
@@ -46,15 +50,3 @@
     "loadingText": "Leter..."
   }
 }
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About

@@ -29,8 +29,12 @@
     "openingplaceholder": "Monday-Friday 10am to 8pm",
     "website": "Website",
     "websiteplaceholder": "http://www.example.com/",
-    "social": "Social Network",
-    "socialplaceholder": "@OpenStreetMap or https://www.facebook.com/OpenStreetMap",
+    "email": "Email",
+    "emailplaceholder": "contact@example.com",
+    "twitter": "Twitter",
+    "twitterplaceholder": "@OpenStreetMap",
+    "facebook": "Facebook",
+    "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
     "done": "Done!"
   },
   "step3": {
@@ -44,5 +48,10 @@
   "messages": {
     "success": "<strong>Found it!</strong> Move the marker until it is <strong>exactly on your business</strong>.<br />When you are happy, we can start to <a href='javascript:check_coordinates()'>add more details</a>.",
     "loadingText": "Searching..."
+  },
+  "validation": {
+    "missingCategory": "Please select at least one category.",
+    "missingName": "Please enter a name.",
+    "missingPhoneOrWebsite": "Please enter a valid website or phone number."
   }
 }

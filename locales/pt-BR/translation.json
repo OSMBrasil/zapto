@@ -28,8 +28,12 @@
     "openingplaceholder": "Segunda a sexta-feira, das 10:00 às 19:00",
     "website": "Website",
     "websiteplaceholder": "www.exemplo.com.br/",
-    "social": "Redes sociais",
-    "socialplaceholder": "@OpenStreetMap www.facebook.com/OpenStreetMap",
+    "email": "Email",
+    "emailplaceholder": "contact@example.com",
+    "twitter": "Twitter",
+    "twitterplaceholder": "@OpenStreetMap",
+    "facebook": "Facebook",
+    "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
     "done": "Gravar"
   },
   "step3": {
@@ -43,5 +47,10 @@
   "messages": {
     "success": "Encontramos! Clique e arraste o marcador para o local do seu negócio, então você estará pronto para <a href=\"#details\">adicionar à nossa lista os detalhes de sua empresa</a>.",
     "loadingText": "Localizando..."
+  },
+  "validation": {
+    "missingCategory": "Selecione pelo menos uma categoria.",
+    "missingName": "Por favor insira um nome.",
+    "missingPhoneOrWebsite": "Insira um site ou número de telefone válido."
   }
 }
