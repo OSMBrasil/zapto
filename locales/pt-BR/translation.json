@@ -35,7 +35,7 @@
     "facebook": "Facebook",
     "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
     "notes": "Notas adicionais",
-    "notesplaceholder": "Algo mais a acrescentar, outra rede social",
+    "notesplaceholder": "Mais alguma informação relevante? (opcional - até 280 caracteres)",
     "done": "Salvar"
   },
   "step3": {
