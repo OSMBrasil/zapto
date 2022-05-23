@@ -10,7 +10,7 @@
     "scope_url_host": "zapto.openstreetmap.org.br",
     "scope_url_path": "/"
   },
-  "start_url": "zapto.openstreetmap.org.br",
+  "start_url": "https://zapto.openstreetmap.org.br",
   "display": "fullscreen",
   "scope": "/",
   "orientation": "portrait",
