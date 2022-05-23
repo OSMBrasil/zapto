@@ -35,6 +35,8 @@
     "twitterplaceholder": "@OpenStreetMap",
     "facebook": "Facebook",
     "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
+        "notes": "Additional notes",
+    "notesplaceholder": "Any other relevant information? (optional - up to 280 characters)",
     "done": "Done!"
   },
   "step3": {
