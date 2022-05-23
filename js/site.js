@@ -134,6 +134,7 @@ $("#collect-data-done").click(function() {
         "website: " + $("#website").val() + "\n" +
         "twitter: " + $("#twitter").val() + "\n" +
         "facebook: " + $("#facebook").val() + "\n" +
+        "notes: " + $("#notes").val() + "\n" +
         "email: " + $("#email").val() + "\n" +
         "hours: " + $("#opening_hours").val() + "\n" +
         "category: " + $("#category").val().join(", ") + "\n" +
