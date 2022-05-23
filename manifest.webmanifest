@@ -55,6 +55,5 @@
       "protocol": "web+site",
       "url": "/?type=%s"
     }
-    }
   ]
 }
