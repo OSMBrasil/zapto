@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<html lang="pt-br"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
+<link rel="shortcut icon" href="https://zapto.openstreetmap.org.br/favicon.ico">
+<meta name="theme-color" content="#274fa3">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="HandheldFriendly" content="true">
+ <meta name="description" content="Você não está conectada a internet">	
+    <title>Zapto - OpenStreetMap | Não conectado</title>
+    <style type="text/css" media="screen">
+          body {
+            background-color: #ffffff;
+            padding: 0;
+            margin: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+          }
+
+      .container { margin: 50px auto 40px auto; width: 600px; text-align: center; }
+
+      a { color: #4183c4; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      h1 { width: 800px; position:relative; left: -100px; letter-spacing: -1px; line-height: 60px; font-size: 60px; font-weight: 100; margin: 0px 0 50px 0; text-shadow: 0 1px 0 #fff; }
+      p { color: rgba(0, 0, 0, 0.5); margin: 20px 0; line-height: 1.6; }
+
+      ul { list-style: none; margin: 25px 0; padding: 0; }
+      li { display: table-cell; font-weight: bold; width: 1%; }
+
+      .logo { display: inline-block; margin-top: 35px; }
+      .logo-img-2x { display: none; }
+      }
+
+      #suggestions {
+        margin-top: 35px;
+        color: #ccc;
+      }
+      #suggestions a {
+        color: #666666;
+        font-weight: 200;
+        font-size: 14px;
+        margin: 0 10px;
+      }
+
+       button {
+        display: block;
+      }
+      
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+
+      <h1>Não conectado</h1>
+      <p><strong>Você está desconectado da internet</strong></p>
+
+      <p>
+        O endereço digitado não está acessível 
+      </p>
+
+      <p>
+        Certifique-se de que está conectado com a internet.<br>
+        Para voltar para a página inicial clique <a href="https://zapto.openstreetmap.org.br/">aqui</a>.
+      </p>
+
+      <p>
+
+      <div id="suggestions">
+        <a href="https://github.com/OSMBrasil/zapto/issues">Sugestões</a> &mdash;
+        <a href="https://github.com/OSMBrasil">Contato</a>
+      </div>
+
+      <a href="/" class="logo logo-img-1x">
+        <img width="32" height="32" title="" alt="" src="imagens/logocerto.png">
+        </a>
+    </div>
+
+    <!-- Inline the page's JavaScript file. -->
+    <script>
+      // Manual reload feature.
+      document.querySelector("button").addEventListener("click", () => {
+        window.location.reload();
+      });
+      
+      // Listen to changes in the network state, reload when online.
+      // This handles the case when the device is completely offline.
+      window.addEventListener('online', () => {
+        window.location.reload();
+      });
+
+      // Check if the server is responding and reload the page if it is.
+      // This handles the case when the device is online, but the server
+      // is offline or misbehaving.
+      async function checkNetworkAndReload() {
+        try {
+          const response = await fetch('.');
+          // Verify we get a valid response from the server
+          if (response.status >= 200 && response.status < 500) {
+            window.location.reload();
+            return;
+          }
+        } catch {
+          // Unable to connect to the server, ignore.
+        }
+        window.setTimeout(checkNetworkAndReload, 2500);
+      }
+
+      checkNetworkAndReload();
+    </script>
+  </body>
+</html>
