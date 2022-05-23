@@ -11,14 +11,14 @@
     "scope_url_path": "/"
   },
   "start_url": "zapto.openstreetmap.org.br",
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "/",
   "orientation": "portrait",
   "background_color": "#3740ff",
   "theme_color": "#2f3030",
   "icons": [
     {
-      "src": "img/foto192.png",
+      "src": "img/192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
@@ -26,22 +26,6 @@
       "src": "img/foto512.png",
       "sizes": "512x512",
       "type": "image/png"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Editar mapa",
-      "short_name": "M",
-      "description": "OpenStreetMap, o mapa mundial editável e livre",
-      "url": "https://www.openstreetmap.org/",
-      "icons": [{ "src": "img/globo1.png", "sizes": "72x72" }]
-    },
-    {
-      "name": "Site",
-      "short_name": "S",
-      "description": "O site do OpenStreetMap Brasil",
-      "url": "https://www.openstreetmap.org.br/",
-      "icons": [{ "src": "img/globo1.png", "sizes": "72x72" }]
     }
   ],
     "capture_links": "existing_client_event",
