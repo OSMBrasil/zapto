@@ -1,19 +1,21 @@
 <!DOCTYPE html>
- 
-<html lang="en-US">
+
+<html lang="en-US" dir="auto">
 
 <head>
   <title lang="en-US">On OpenStreetMap - a tool to add your business to the map</title>
   <title lang="es">Su OpenStreetMap - Aggiungi la tua attività su OpenStreetMap</title>
-    <title lang="pt-BR">OpenStreetMap - uma ferramenta para adicionar sua empresa ao mapa</title>
+  <title lang="pt-BR">OpenStreetMap - uma ferramenta para adicionar sua empresa ao mapa</title>
+  <title lang="fa-IR">On OpenStreetMap - ابزاری برای اضافه نمودن کسب و کار شما بر روی نقشه OSM</title>
   <meta name="description" lang="en-US" content="Quickly and easily list your business on OpenStreetMap" />
-    <meta name="description" lang="pt-BR" content="Liste sua empresa de forma rápida e fácil no OpenStreetMap" />
   <meta name="description" lang="es" content="Aggiungi la tua attività su OpenStreetMap, il più grande database di dati geografici aperto al mondo! Diventa ricercabile da migliaia di utenti da tutto il mondo.">
+  <meta name="description" lang="pt-BR" content="Liste sua empresa de forma rápida e fácil no OpenStreetMap" />
+  <meta name="description" lang="fa-IR" content="به سرعت و به سادگی کسب و کار خود را وارد نقشه OpenStreetMap نمایید." />
   <link rel="shortcut icon" href="img/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta charset="UTF-8">
- 
+
   <!-- SELECT 2  CSS-->
   <link rel='stylesheet' type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.css" />
   <!-- LEAFLET  CSS-->
@@ -33,7 +35,7 @@
   <![endif]-->
 
   <!-- LEAFLET  JS-->
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.js" integrity="sha512-Dqm3h1Y4qiHUjbhxTuBGQsza0Tfppn53SHlu/uj1f+RT+xfShfe7r6czRf5r2NmllO2aKx+tYJgoxboOkn1Scg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/L.Control.Locate.js"></script>
   <!-- JQUERY  JS-->
   <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
@@ -48,34 +50,30 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/1.3.1/i18nextHttpBackend.min.js"></script>
-
-  <!-- CONFETTI JS - https://github.com/mathusummut/confetti.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.min.js" integrity="sha512-n4mkhsTTwnEox+TGRnxJmtvrU+Rgec7NUjrHmZE7RlYOim+XLwgMMe1/jovYl/Eh24hvPLKgX0QGdPfATAphqQ==" crossorigin="anonymous"></script>
-  
 </head>
 
 <body>
   <div class='container-sm mt-3 mb-5' style='display: inline-block'>
       <select name='language' id='languageSwitcher'></select>
   </div>
-  <div class="container-sm mt-3 mb-5">    
+  <div class="container-sm mt-3 mb-5">
     <div class="row">
       <div class="col">
         <img src='img/osm.png' alt="OpenStreetMap logo" class="mx-auto" />
       </div>
-      <div class="col-10 text-break">
+      <div class="col-10 text-break" dir="auto">
         <h1 data-i18n="app.title" class="mx-auto text-primary">On OpenStreetMap</h1>
         <p data-i18n="app.desc" class="p-2"></p>
       </div>
     </div>
 
-    <nav class="nav nav-pills nav-fill border p-1 rounded">
+    <nav class="nav nav-pills nav-fill border p-1 rounded" dir="auto">
       <a class="nav-item nav-link active rounded-0 bg-success" id="step1" href="#location" data-i18n="step1.title">Location</a>
       <a class="nav-item nav-link rounded-0 disabled" id="step2" href="#details" data-i18n="step2.title">Details</a>
       <strong class="nav-item nav-link disabled rounded-0" id="step3" data-i18n="step3.title"></strong>
     </nav>
 
-    <div class='mt-3' id='address-step'>
+    <div class='mt-3' id='address-step' dir="auto">
       <div class='center pad2'>
         <span id='instructions' class="text-info" for="address" style="font-size: x-large;" data-i18n="step1.desc"></span>
       </div>
@@ -97,8 +95,8 @@
 
     <!-- step 2 -->
     <div class='mt-3 d-none' id='collect-data-step'>
-      <p data-i18n="[html]step2.desc" class="h3 text-info"></p>
-      <form id="form">
+      <p data-i18n="[html]step2.desc" class="h3 text-info" dir="auto"></p>
+      <form id="form" dir="auto">
         <!-- categories -->
         <div class="row">
           <div class="form-group col">
@@ -120,7 +118,8 @@
         <p data-i18n="step2.addressalt" class="mt-3"></p>
         <!-- address 1 -->
         <div class="form-row">
-          <div class="form-group col-md-5">
+          <!-- Street -->
+          <div id="streetgroup" class="form-group col-md-5">
             <label for='addressalt' data-i18n="step2.street"></label>
             <div class="input-group">
               <div class="input-group-prepend">
@@ -129,7 +128,8 @@
               <input id='addressalt' autocomplete="street-address" type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.addressaltplaceholder" />
             </div>
           </div>
-          <div class="form-group col-md-2">
+          <!-- House number -->
+          <div id="hnumbergroup" class="form-group col-md-2">
             <label for="hnumberalt" data-i18n="step2.housenumber"></label>
             <div class="input-group">
               <div class="input-group-prepend">
@@ -138,8 +138,18 @@
               <input type="text" class="form-control" id="hnumberalt" data-i18n="[placeholder]step2.housenumberplaceholder">
             </div>
           </div>
-
-          <div class="form-group col-md-3">
+          <!-- Place name -->
+          <div id="placenamegroup" class="form-group col-md-5">
+            <label for="placenamealt" data-i18n="step2.placename"></label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="twa twa-cityscape"></i></span>
+              </div>
+              <input type="text" class="form-control" id="placenamealt" data-i18n="[placeholder]step2.placenameplaceholder">
+            </div>
+          </div>
+          <!-- City -->
+          <div id="citygroup" class="form-group col-md-3">
             <label for="city" data-i18n="step2.city"></label>
             <div class="input-group">
               <div class="input-group-prepend">
@@ -148,7 +158,8 @@
               <input type="text" class="form-control" id="city" data-i18n="[placeholder]step2.cityplaceholder">
             </div>
           </div>
-          <div class="form-group col-md-2">
+          <!-- Postcode -->
+          <div id="postcodegroup" class="form-group col-md-2">
             <label for="postcode" data-i18n="step2.postcode"></label>
             <div class="input-group">
               <div class="input-group-prepend">
@@ -262,44 +273,20 @@
           <div class="form-group col">
             <label for='delivery' data-i18n="step2.delivery"></label>
             <div class="input-group">
-            <div class="input-group-prepend">
-   <div class="input-group-text">
-     <div class="custom-control custom-checkbox">
-  <input type="checkbox" class="custom-control-input" id="delivery-check" name="delivery-check">
-
-       <label for="delivery-check" id="label-delivery-check" class="custom-control-label mb-0 ml-2" data-i18n="step2.no"></label>
-</div>
-   </div>
- </div>
-            <input id='delivery' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.deliveryplaceholder" />
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="delivery-check" name="delivery-check">
+                    <label for="delivery-check" id="label-delivery-check" class="custom-control-label mb-0 ml-2" data-i18n="step2.no"></label>
+                  </div>
+                </div>
+              </div>
+              <input id='delivery' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.deliveryplaceholder" />
+            </div>
           </div>
-        </div>
           <div class="form-group col-sm-6">
             <label for='delivery_description' data-i18n="step2.delivery_description"></label>
             <input id='delivery_description' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.delivery_descriptionplaceholder" />
-          </div>
-        </div>
-
-
-        <!-- delivery_covid -->
-        <div class="row mt-2">
-          <div class="form-group col">
-            <span class="badge badge-danger">COVID-19</span> <label data-i18n="step2.delivery_covid"></label>
-            <div class=" form-check-inline">
-              <div class="custom-control custom-radio">
-                <input type="radio" id="yes-covid19" name="delivery_covid" class="custom-control-input form-check-input" value='Y'>
-                <label class="custom-control-label form-check-label" for="yes-covid19" data-i18n="step2.yes"></label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input type="radio" id="no-covid19" name="delivery_covid" class="custom-control-input form-check-input" value='N'>
-                <label class="custom-control-label form-check-label" for="no-covid19" data-i18n="step2.no"></label>
-              </div>
-            </div>
-          </div>
-          <!-- delivery_covid -->
-          <div class="form-group col-sm-6">
-            <span class="badge badge-danger">COVID-19</span> <label for='delivery_covid_description' data-i18n="step2.delivery_covid_description"></label>
-            <input id='delivery_covid_description' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.delivery_covid_descriptionplaceholder" />
           </div>
         </div>
 
@@ -330,30 +317,9 @@
           </div>
         </div>
 
-
-        <!-- takeaway_covid -->
-        <div class="row mt-2">
-          <div class="form-group col">
-            <span class="badge badge-danger">COVID-19</span> <label data-i18n="step2.takeaway_covid"></label>
-            <div class=" form-check-inline">
-              <div class="custom-control custom-radio">
-                <input type="radio" id="yes-takeaway-covid19" name="takeaway_covid" class="custom-control-input form-check-input" value='yes'>
-                <label class="custom-control-label form-check-label" for="yes-takeaway-covid19" data-i18n="step2.yes"></label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input type="radio" id="no-takeaway-covid19" name="takeaway_covid" class="custom-control-input form-check-input" value='no'>
-                <label class="custom-control-label form-check-label" for="no-takeaway-covid19" data-i18n="step2.no"></label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input type="radio" id="only-takeaway-covid19" name="takeaway_covid" class="custom-control-input form-check-input" value='only'>
-                <label class="custom-control-label form-check-label" for="only-takeaway-covid19" data-i18n="step2.only_takeaway"></label>
-              </div>
-            </div>
-          </div>
-          <!-- takeaway_covid -->
-          <div class="form-group col-sm-6">
-            <span class="badge badge-danger">COVID-19</span> <label for='takeaway_covid_description' data-i18n="step2.takeaway_covid_description"></label>
-            <input id='takeaway_covid_description' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.takeaway_covid_descriptionplaceholder" />
+        <div class="row">
+          <div class="col">
+              <p id="required_info_alert" class="alert alert-info" role="alert" data-i18n="step2.required"></p>
           </div>
         </div>
 
@@ -365,14 +331,14 @@
       <p class="h2 text-success mt-3 mb-4" data-i18n="[html]step3.row1"></p>
       <p><span class="h4" data-i18n="step3.row2"></span> <span id='linkcoords'>&nbsp;</span></p>
       <p class="alert alert-info" role="alert" data-i18n="[html]step3.row3"></p>
-      <p><span data-i18n="step3.row4"></span> <a href="#location" onclick="clearFields()" data-i18n="step3.row4a"></a>!
-      </p>
+      <p><span data-i18n="step3.row4"></span> <a href="#location" onclick="clearFields()" data-i18n="step3.row4a"></a>!</p>
 
       <div data-i18n="[html]step3.finalmessage"></div>
     </div>
-    <p class="font-weight-light small text-muted mt-4" data-i18n="[html]messages.credits"></p>
+    <p class="font-weight-light small text-muted mt-4" data-i18n="[html]messages.credits" dir="auto"></p>
   </div>
   <script src="js/i18n.js"></script>
   <script src='js/site.js'></script>
 </body>
+</html>
 </html>
