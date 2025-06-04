@@ -2,7 +2,7 @@
   "app": {
     "title": "Op OpenStreetMap",
     "desc": "OpenStreetMap is een open wereldkaart gebruikt door mensen wereldwijd om te navigeren en lokale bedrijven te vinden.<br/> Het is makkelijk en gratis om jouw bedrijf aan de kaart toe te voegen!",
-    "footer": "Broncode is beschikbaar op <a href='https://github.com/OSMBrasil/zaptog'>GitHub</p>"
+    "footer": "Broncode is beschikbaar op <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
   },
   "step1": {
     "title": "Locatie",
@@ -56,17 +56,11 @@
     "delivery_description": "Gegevens bezorgservice",
     "delivery_descriptionplaceholder": "Minimale bestelling 15€ gratis verzending",
     "delivery_descriptiondesc": "Levering beschrijving",
-    "delivery_covid": "Is er een bezorgservice tijdens COVID-19-noodsituatie?",
-    "delivery_covid_descriptionplaceholder": "ma-vr 19.00 tot 21.00 uur",
-    "delivery_covid_description": "Bezorgservicegegevens tijdens COVID-19-noodsituatie",
     "takeaway": "Is er een afhaalmogelijkheid?",
     "takeawaydesc": "Afhaal",
     "takeaway_description": "Gegevens afhaalservice",
     "takeaway_descriptionplaceholder": "Niet beschikbaar op zaterdagavond",
     "takeaway_descriptiondesc": "Afhaal beschrijving",
-    "takeaway_covid": "Is er een afhaalservice tijdens COVID-19-noodsituatie?",
-    "takeaway_covid_descriptionplaceholder": "ma-vr 19.00 tot 21.00 uur",
-    "takeaway_covid_description": "Details afhaalservice tijdens COVID-19-noodsituatie",
     "only_takeaway": "Alleen afhaalmaaltijden",
     "email": "E-mail",
     "emailplaceholder": "contact@voorbeeld.nl",
@@ -88,13 +82,13 @@
     "row4a": "Terug naar beginscherm"
   },
   "messages": {
-    "success": "<strong>Gevonden!</strong> Verplaats de marker zodat hij <strong>precies op je bedrijf</strong> staat.<br />Als je tevreden bent kunnen we beginnen met het <a href='javascript:check_coordinates()'>toevoegen van meer details</a>.",
+    "success": "<strong>Gevonden!</strong> Verplaats de marker zodat hij <strong>precies op je bedrijf</strong> staat.<br />Als je tevreden bent kunnen we beginnen met het toevoegen van meer details.",
     "loadingText": "Zoeken...",
-    "manualPosition": " Je hebt de marker geactiveerd! Klik en sleep het naar de positie van uw bedrijfsplaats, zodat u klaar bent om <a href='#details'>meer details toe te voegen.</a>",
+    "manualPosition": " Je hebt de marker geactiveerd! Klik en sleep het naar de positie van uw bedrijfsplaats, zodat u klaar bent om meer details toe te voegen.",
     "modalButton": "Close",
     "modalTitle": "Classificatie rolstoeltoegankelijkheid",
     "needsChecking": "moet worden gecontroleerd",
-    "credits": "Een open source project ontwikkeld door de wereldwijde <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> gemeenschap <i class=\"twa twee-globe-met-meridianen\"></i>. Draag bij aan dit project op <a href=\"https://github.com/OSMBrasil/zapto\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Een open source project ontwikkeld door de wereldwijde <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> gemeenschap <i class=\"twa twee-globe-met-meridianen\"></i>. Draag bij aan dit project op <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
   },
   "validation": {
     "missingCategory": "Kies tenminste één categorie.",

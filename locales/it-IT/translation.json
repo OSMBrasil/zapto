@@ -55,17 +55,11 @@
     "delivery_description": "Dettagli sul servizio di consegna",
     "delivery_descriptionplaceholder": "Ordine minimo 15€ consegna gratuita",
     "delivery_descriptiondesc": "Descrizione consegna",
-    "delivery_covid": "È attivo un servizio di consegna durante l'emergenza COVID-19?",
-    "delivery_covid_descriptionplaceholder": "Lu-Ve dalle 19:00 alle 21:00",
-    "delivery_covid_description": "Dettagli sul servizio di consegna durante l'emergenza COVID-19",
     "takeaway": "È possibile ordinare d'asporto?",
     "takeawaydesc": "Asporto",
     "takeaway_description": "Dettagli sul servizio d'asporto",
     "takeaway_descriptionplaceholder": "Tutti i giorni tranne il sabato sera",
     "takeaway_descriptiondesc": "Descrizione asporto",
-    "takeaway_covid": "È possibile ordinare d'asporto durante l'emergenza COVID-19?",
-    "takeaway_covid_descriptionplaceholder": "Lu-Ve dalle 19:00 alle 21:00",
-    "takeaway_covid_description": "Dettagli sul servizio d'asporto durante l'emergenza COVID-19",
     "only_takeaway": "Solo asporto",
     "yes": "Sì",
     "no": "No",
@@ -82,12 +76,12 @@
     "finalmessage": "<div class=\"card\"><h5 class=\"card-header\">Potrebbero interessarti</h5><div class=\"card-body\"> <h5 class=\"card-title\">Aggiungi il tuo indirizzo su OpenStreetMap</h5> <p class=\"card-text\">Grazie per aver aggiunto la tua attività su OpenStreetMap. Se vuoi, puoi aggiungere anche un indirizzo. Bastano soltanto un dispositivo dotato di GPS e un po' di tempo libero!</p> <a href=\"https://naposm.github.io/indirizzo/\" class=\"btn btn-primary\">Aggiungi subito il tuo indirizzo!</a></div><hr><div class=\"card-body\">  <h5 class=\"card-title\">Impara a utilizzare OpenStreetMap</h5> <p class=\"card-text\">OpenStreetMap è una mappa libera e modificabile da chiunque. Impara subito le basi e inizia anche tu a mappare!</p> <a href=\"https://learnosm.org/it/\" class=\"btn btn-primary\">Impara a utilizzare OpenStreetMap</a></div></div>"
   },
   "messages":{
-  "success": "Trovato! Clicca e trascina l'indicatore sulla posizione della tua attività commerciale, così potrai iniziare a <a href='#details'>aggiungere dettagli alla tua scheda.</a>",
-  "manualPosition": "Hai attivato l'indicatore! Cliccalo e trascinalo sulla posizione della tua attività commerciale, così potrai iniziare a <a href='#details'>aggiungere dettagli alla tua scheda.</a>",
+  "success": "Trovato! Clicca e trascina l'indicatore sulla posizione della tua attività commerciale, così potrai iniziare a aggiungere dettagli alla tua scheda.",
+  "manualPosition": "Hai attivato l'indicatore! Cliccalo e trascinalo sulla posizione della tua attività commerciale, così potrai iniziare a aggiungere dettagli alla tua scheda.",
   "loadingText": "Sto cercando...",
   "modalButton": "Chiudi",
   "modalTitle": "Classificazione dell'accessibilità in sedia a rotelle",
   "needsChecking": "richiede controllo",
-  "credits": "Un progetto open source sviluppato dalla comunità mondiale di <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridians\"></i>. Contribuisci a questo progetto su <a href=\"https://github.com/OSMBrasil/zapto\" class=\"badge badge-dark\">GitHub</a>."
+  "credits": "Un progetto open source sviluppato dalla comunità mondiale di <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridians\"></i>. Contribuisci a questo progetto su <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
   }
 }
